@@ -2,8 +2,9 @@
 #include<stdlib.h>
 #include<string.h>
 #include<stdbool.h>
+#include <unistd.h>
 
-
+/*
 void selectionSort(int arr[], int n) {
 	int i, j, aux;
 
@@ -22,11 +23,6 @@ void selectionSort(int arr[], int n) {
 	}
 }
 
-struct Usuario {
-	char username[30];
-	char password[30];
-};
-
 int  binarySearch(int arr[], int valorBusca) {
 	int esquerda = arr[0];
 	int direita = sizeof(arr) - 1;
@@ -44,23 +40,31 @@ int  binarySearch(int arr[], int valorBusca) {
 		}
 	}
 }
+*/
+
+int addUserFile(FILE *file, char username[30], char password[30]) {
+    file = fopen("Users.txt", "a+");
+
+    // validação de erro no arquivo
+    if (file == NULL) {
+        return 0;
+    } else {
+        // grava informações no arquivo
+        fprintf(file, "%s;%s", username, password);
+        fclose(file); // movido para fora do bloco else
+        return 1;
+    }
+}
 
 int main() {
 	char usuario[30];
 	char senha[30];
 	char confirmacaoSenha[30];
 	int escolha;
-	struct Usuario userInformation;
-	int array[30] = {5,4,3,2,1,10,9,8,7,6,50,40,30,20,10,100,90,80,70,60,500,400,300,200,100,1000,900,800,700,600};
-	//int arr[30] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100, 100, 200, 300, 400, 500, 600, 700, 800, 900, 1000};
-	int arrayItem = binarySearch(arr, 80);
-	printf("%i", arrayItem);
-	
-	// Algoritmo de ordena��o do array
-	selectionSort(array, 30);
+	FILE * userFile;
 
 	bool continua = true;
-/*
+
 	while (continua) {
 		printf("Digite a opcao que deseja:\n1- Entrar na minha conta.\n2- Criar nova conta.\n3- Sair\nEscolha: ");
 		scanf("%i", &escolha);
@@ -71,8 +75,7 @@ int main() {
 				break;
 			case 2:
 				printf("Digite seu nome de usuario: ");
-				scanf("%s", usuario);
-				strcpy(userInformation.username, usuario); // copia para o atributo da struct o que foi digitado
+				scanf("%29s", usuario);
 				do {
 					printf("Crie sua senha: ");
 					scanf("%29s", senha);
@@ -80,17 +83,32 @@ int main() {
 					printf("Confirme sua senha: ");
 					scanf("%29s", confirmacaoSenha);
 
-				} while (strcmp(senha, confirmacaoSenha) != 0);
-				strcpy(userInformation.password, senha); // copia para o atributo da struct o que foi digitado
-				printf("Usuario cadastrado com sucesso!!\n");
-				//printf("Nome: %s -\nSenha: %s\n", userInformation.username, userInformation.password);
+					if (strcmp(senha, confirmacaoSenha) != 0) {
+						printf("As senhas nao coincidem. Tente novamente.\n\n");
+					} else if (strlen(senha) < 8) {
+						printf("A senha deve ter pelo menos 8 caracteres. Tente novamente.\n\n");
+					}
+				} while (strcmp(senha, confirmacaoSenha) != 0 || strlen(senha) < 8);
+				int validacaoUsuario = addUserFile(userFile, usuario, senha);
+				if (validacaoUsuario == 1) {
+					printf("Usuario cadastrado com sucesso!!\n");
+					printf("Agora voce pode logar no sistema!!\n");
+				} else {
+					printf("Erro ao cadastrar usuario!!\n");
+				}
+				// Limpa console
+				sleep(1);
+				system("cls");
 				break;
-
 			case 3:
 				continua = false;
 				break;
+			default:
+				printf("Digite uma opcao valida\n");
+				sleep(1.5);
+				system("cls");
 		}
 	}
-*/
+
 	return 0;
 }

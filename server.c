@@ -5,9 +5,13 @@
 7 - Desconectar.
 */
 
+// Pesquisar sobre a DLL windows.h
+
+
 #include <stdio.h>
 #include <winsock2.h>
 #define PORT "5000"
+
 int main() {
 	WSADATA wsaData; // armazena informações do Windows Socket
 	int iResult; // valida se a inicialização foi correta
