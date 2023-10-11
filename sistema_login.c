@@ -43,20 +43,21 @@ int  binarySearch(int arr[], int valorBusca) {
 */
 
 int addUserFile(FILE *file, char username[30], char password[30]) {
-    file = fopen("Users.txt", "a+");
+	file = fopen("Users.txt", "a+");
 
-    // validação de erro no arquivo
-    if (file == NULL) {
-        return 0;
-    } else {
-        // grava informações no arquivo
-        fprintf(file, "%s;%s", username, password);
-        fclose(file); // movido para fora do bloco else
-        return 1;
-    }
+	// validação de erro no arquivo
+	if (file == NULL) {
+		return 0;
+	} else {
+		// grava informações no arquivo
+		fprintf(file, "%s;%s\n", username, password);
+		fclose(file); // movido para fora do bloco else
+		return 1;
+	}
 }
 
 int main() {
+	int usuarioEncontrado = 0;
 	char usuario[30];
 	char senha[30];
 	char confirmacaoSenha[30];
@@ -72,6 +73,35 @@ int main() {
 		switch (escolha) {
 			case 1:
 
+				userFile = fopen("Users.txt", "a+");
+				printf("Digite seu nome de usuario: ");
+				scanf("%29s", usuario);
+				getchar();
+
+				printf("Digite sua senha: ");
+				scanf("%29s", senha);
+				getchar();
+
+				while(!feof(userFile)) {
+					char usuarioFile[30];
+					char senhaFile[30];
+					fscanf(userFile, "%s;%s", usuarioFile, senhaFile);
+					if (strcmp(usuarioFile, usuario) == 0 && strcmp(senhaFile, senha) == 0) {
+						usuarioEncontrado = 1;
+					} else {
+						usuarioEncontrado = 0;
+					}
+				}
+				if (usuarioEncontrado = 1) {
+					printf("Usuario encontrado, entrando no sistema.");
+					sleep(3);
+					system("cls");
+				} else {
+					printf("Usuario nao encontrado.");
+					sleep(3);
+					system("cls");
+				}
+				fclose(userFile);
 				break;
 			case 2:
 				printf("Digite seu nome de usuario: ");
