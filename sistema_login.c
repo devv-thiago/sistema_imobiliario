@@ -82,20 +82,39 @@ void registroUsuario() {
 	system("cls");
 }
 
-void Menu(int menu) {
-	switch(menu) {
-		case 1:
-			printf("opcao 1");
-			break;
-		case 2:
-			printf("opcao 2");
-			break;
-		case 3:
-			printf("opcao 3");
-			break;
-		default:
-			printf("Opcao invalida");
-			break;
+void MenuPrincipal() {
+	bool continua = true;
+	int usuarioEncontrado;// recebe um valor caso usuario seja encontrado
+	int escolha;
+	while (continua) {
+		printf("Digite a opcao que deseja:\n1 - Imoveis\n2 - Clientes\n3 - Simular pagamento\n4 - Registro de movimentacoes\n5 - Relatorio gerencial\n6 - Sair\nEscolha: ");
+		scanf("%i", &escolha);
+		switch(escolha) {
+			case 1:
+				// Chama modulo Imoveis
+				break;
+			case 2:
+				// Chama modulo Clientes
+				break;
+			case 3:
+				// Chama modulo Simulacao de pagamento
+				break;
+			case 4:
+				// Chama modulo Registro de movimentacao
+				break;
+			case 5:
+				// Chama modulo Relatorio gerencial
+				break;
+			case 6:
+				continua = false;
+				break;
+			default:
+				printf("Opcao invalida");
+				sleep(1.5);
+				system("cls");
+				break;
+		}
+
 	}
 }
 void menuLogin() {
@@ -104,16 +123,17 @@ void menuLogin() {
 	int escolha;
 
 	while (continua) {
-		printf("Digite a opcao que deseja:\n1- Entrar na minha conta.\n2- Criar nova conta.\n3- Sair\nEscolha: ");
+		printf("Digite a opcao que deseja:\n1 - Entrar na minha conta.\n2 - Criar nova conta.\n3 - Sair\nEscolha: ");
 		scanf("%i", &escolha);
 
 		switch (escolha) {
 			case 1:
-				usuarioEncontrado = validaUsuario(); 
+				usuarioEncontrado = validaUsuario();
 				if (usuarioEncontrado == 1) {
 					printf("Usuario encontrado, entrando no sistema.\n");
 					sleep(3);
 					system("cls");
+					MenuPrincipal(); // invoca menu principal
 				} else {
 					printf("Usuario nao encontrado.\n");
 					sleep(3);
@@ -137,6 +157,5 @@ void menuLogin() {
 int main() {
 
 	menuLogin();
-
 	return 0;
 }
