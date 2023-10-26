@@ -3,7 +3,9 @@
 #include<string.h>
 #include<stdbool.h>
 #include <unistd.h>
-#define ARQ_USUARIOS "Users.txt"
+#include "modulo_simulacao_pagamento\menu_simulacao.c"
+#define ARQ_USUARIOS "Data/Users.txt"
+
 
 int addUserFile(char username[30], char password[30]) {
 	FILE *file = fopen(ARQ_USUARIOS, "a+");
@@ -97,7 +99,7 @@ void MenuPrincipal() {
 				// Chama modulo Clientes
 				break;
 			case 3:
-				// Chama modulo Simulacao de pagamento
+				MenuSimulacao();
 				break;
 			case 4:
 				// Chama modulo Registro de movimentacao
