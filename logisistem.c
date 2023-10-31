@@ -4,6 +4,7 @@
 #include<stdbool.h>
 #include <unistd.h>
 #include "modulo_simulacao_pagamento\menu_simulacao.c"
+#include "modulo_logs\registro_log.c"
 #define ARQ_USUARIOS "Data/Users.txt"
 
 
@@ -105,7 +106,7 @@ void MenuPrincipal() {
 				// Chama modulo Registro de movimentacao
 				break;
 			case 5:
-				// Chama modulo Relatorio gerencial
+				menuLog();
 				break;
 			case 6:
 				continua = false;
