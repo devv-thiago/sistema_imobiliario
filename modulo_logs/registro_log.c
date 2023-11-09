@@ -2,6 +2,7 @@
 #include <time.h>
 #include <stdlib.h>
 #include <unistd.h>
+#include <locale.h>
 #define IMOVEL_LOG "log_imovel.txt"
 #define CLIENTE_LOG "log_cliente.txt"
 #define MOVIMENTACAO_LOG "log_movimentacao.txt"
@@ -71,6 +72,8 @@ void exibirLogMovimentacao() {
 
 void menuLog() {
 
+	setLocale(LC_ALL,"");
+
 	int op;
 	do {
 		sleep(1);
@@ -92,7 +95,7 @@ void menuLog() {
 				system("cls");
 				break;
 			default:
-				printf("OpÁ„o inv·lida!!\n");
+				printf("Op√ß√£o inv√°lida!!\n");
 				sleep(1);
 				system("cls");
 				break;
