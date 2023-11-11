@@ -91,11 +91,11 @@ void MenuPrincipal() {
 	int usuarioEncontrado;// recebe um valor caso usuario seja encontrado
 	int escolha;
 	while (continua) {
-		
+
 		printf("LOGISISTEM");
 		printf("\n\n");
-		
-		printf("O que deseja fazer?\n\n[1]Módulo Imoveis.\n[2]Módulo Clientes.\n[3]Módulo Simulação Pagamento\n[4]Módulo Movimentações.\n[5]Logs do sistema.\n[6]Sair.\n\nEscolha: ");
+
+		printf("O que deseja fazer?\n\n[1]Módulo Imoveis.\n[2]Módulo Clientes.\n[3]Módulo Simulação Pagamento\n[4]Módulo Movimentações.\n[5]Logs do sistema.\n[0]Sair.\n\nEscolha: ");
 		scanf("%i", &escolha);
 		switch(escolha) {
 			case 1:
@@ -113,8 +113,8 @@ void MenuPrincipal() {
 			case 5:
 				menuLog();
 				break;
-			case 6:
-				continua = false;
+			case 0:
+				exit(EXIT_FAILURE);
 				break;
 			default:
 				printf("Opção inválida");
@@ -131,11 +131,11 @@ void menuLogin() {
 	int escolha;
 
 	while (continua) {
-		
+
 		printf("LOGISISTEM");
 		printf("\n\n");
-		
-		printf("O que deseja fazer?\n\n[1]Entrar na minha conta.\n[2]Criar nova conta.\n[3]Sair.\n\nEscolha: ");
+
+		printf("O que deseja fazer?\n\n[1]Entrar na minha conta.\n[2]Criar nova conta.\n[0]Sair.\n\nEscolha: ");
 		scanf("%i", &escolha);
 
 		switch (escolha) {
@@ -147,7 +147,7 @@ void menuLogin() {
 					system("cls");
 					MenuPrincipal(); // Chama menu principal
 				} else {
-					printf("Usuário nao encontrado.\n");
+					printf("Usuário nao encontrado.");
 					sleep(3);
 					system("cls");
 				}
@@ -155,7 +155,7 @@ void menuLogin() {
 			case 2:
 				registroUsuario();
 				break;
-			case 3:
+			case 0:
 				continua = false;
 				break;
 			default:
@@ -168,7 +168,6 @@ void menuLogin() {
 }
 
 int main() {
-
 	menuLogin();
 	return 0;
 }
