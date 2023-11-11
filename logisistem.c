@@ -5,6 +5,7 @@
 #include <unistd.h>
 #include "modulo_simulacao_pagamento\menu_simulacao.c"
 #include "modulo_logs\registro_log.c"
+#include "modulo_movimentacoes\movimentacoes.c"
 #define ARQ_USUARIOS "Data/Users.txt"
 
 
@@ -103,7 +104,7 @@ void MenuPrincipal() {
 				MenuSimulacao();
 				break;
 			case 4:
-				// Chama modulo Registro de movimentacao
+				menuMovimentacao();
 				break;
 			case 5:
 				menuLog();

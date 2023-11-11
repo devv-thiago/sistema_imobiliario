@@ -1,0 +1,3 @@
+1020 1234 avenida Terreno 0.00
+0 0 sao Terreno 0.00
+0 0 camilo Apartamento 0.00

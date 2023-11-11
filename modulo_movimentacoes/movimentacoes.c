@@ -62,7 +62,7 @@ void registraVenda() {
     }
 }
 
-int main() {
+void menuMovimentacao() {
     int continua;
     
     do {
@@ -72,6 +72,4 @@ int main() {
         scanf("%d", &continua);
         
     } while (continua == 1);
-
-    return 0;
 }

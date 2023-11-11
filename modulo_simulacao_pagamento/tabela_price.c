@@ -11,7 +11,7 @@ float calculoPrice(float valorFinanciado,float taxaJuros, int numParcelas)
     return valorFinanciado / (((pow(1.0+(taxaJuros/100),numParcelas)) - 1.0) / ((pow(1.0+(taxaJuros/100),numParcelas)) * (taxaJuros/100)));
 }
 
-void price()
+int price()
 {
     float vlImovel, vlEntrada, valorFinanciado, taxaJuros, vlParcelasPorMes, amort, vlPorcInicial;
     float totalJuros=0, totalAmort=0;
@@ -26,9 +26,9 @@ void price()
     {
         sleep(1);
         system("cls");
-        linha(MAX);
-        printf("Deseja fazer uma nova simulação de financiamento no modelo Price?\n\n[s]SIM\n[n]NAO\n\n");
-        scanf(" %c",&iniciar); //Espaço usado antes de %c para limpar o scanf do ENTER pressionado para retornar
+       
+        printf("Deseja fazer uma nova simulaÃ§Ã£o de financiamento no modelo Price?\n\n[s]SIM\n[n]NAO\n\n");
+        scanf(" %c",&iniciar); //EspaÃ§o usado antes de %c para limpar o scanf do ENTER pressionado para retornar
         getchar();
         if(iniciar=='n' || iniciar=='N')
         {
@@ -36,7 +36,7 @@ void price()
         }
         if (iniciar != 's' && iniciar != 'S' && iniciar != 'n' && iniciar != 'N')
         {
-            printf("Opção incorreta! Digite 's' para SIM e 'n' para NÃO\n\n");
+            printf("OpÃ§Ã£o incorreta! Digite 's' para SIM e 'n' para NÃƒO\n\n");
             sleep(1);
             system("cls");
         }
@@ -46,12 +46,12 @@ void price()
             {
                 sleep(1);
                 system("cls");
-                linha(MAX);
-                styleLine(34);
+               
+                
                 printf("TABELA PRICE");
-                styleLine(34);
+                
                 printf("\n\n");
-                printf("Digite o valor do imóvel: R$");
+                printf("Digite o valor do imÃ³vel: R$");
                 scanf("%f",&vlImovel);
 
                 printf("Digite o valor de entrada: R$");
@@ -64,7 +64,7 @@ void price()
                 printf("Digite a taxa de juros(%%): ");
                 scanf("%f",&taxaJuros);
 
-                printf("Digite o número de parcelas: ");
+                printf("Digite o nÃºmero de parcelas: ");
                 scanf("%i",&numParcelas);
 
                 printf("\n");
@@ -72,10 +72,10 @@ void price()
 
                 vlParcelasPorMes = calculoPrice(valorFinanciado, taxaJuros, numParcelas);
 
-                linha(MAX);
+                
                 printf("Valor do financiamento:R$ %.2f reais.\n",valorFinanciado);
                 printf("Valor fixo das parcelas: R$ %.2f reais.\n",vlParcelasPorMes);
-                printf("Números de parcelas: %i vezes\n", numParcelas);
+                printf("NÃºmeros de parcelas: %i vezes\n", numParcelas);
                 printf("Taxa de juros(%%): %.2f%% a.m.\n\n",taxaJuros);
 
                 printf("Valor fixo das parcelas: R$ %.2f reais.\n",vlParcelasPorMes);
@@ -84,23 +84,23 @@ void price()
 
                 amort = vlParcelasPorMes - vlPorcInicial;
 
-                printf("Valor do juros no primeiro mês: R$ %.2f reais.\n",vlPorcInicial);
-                printf("Valor da amortização no primeiro mês: R$ %.2f reais.\n\n",amort);
+                printf("Valor do juros no primeiro mÃªs: R$ %.2f reais.\n",vlPorcInicial);
+                printf("Valor da amortizaÃ§Ã£o no primeiro mÃªs: R$ %.2f reais.\n\n",amort);
                 getchar();
 
                 do
                 {
-                    styleLine(33);
+                    
                     printf("DETALHES - SAC");
-                    styleLine(33);
+                   
                     printf("\n\n");
 
-                    printf("Deseja ver tabela detalhada?\n\n[s]SIM\n[n]NÃO\n\n\n");
+                    printf("Deseja ver tabela detalhada?\n\n[s]SIM\n[n]NÃƒO\n\n\n");
                     scanf("%c",&tabDet);
                     getchar();
                     if(tabDet != 's' && tabDet != 'S' && tabDet != 'n' && tabDet != 'N')
                     {
-                        printf("Opção incorreta! Digite 's' para SIM e 'n' para NÃO\n\n");
+                        printf("OpÃ§Ã£o incorreta! Digite 's' para SIM e 'n' para NÃƒO\n\n");
                         sleep(1);
                         system("cls");
                     }
@@ -110,21 +110,19 @@ void price()
                         {
                             sleep(1);
                             system("cls");
-                            linha(MAX);
-
-                            styleLine(25);
-                            printf("DETALHES DE SIMULAÇÃO - PRICE");
-                            styleLine(26);
+                            
+                            printf("DETALHES DE SIMULAÃ‡ÃƒO - PRICE");
+                            
                             printf("\n\n");
 
                             printf("Valor do financiamento:R$ %.2f reais.\n",valorFinanciado);
                             printf("Valor fixo das parcelas: R$ %.2f reais.\n",vlParcelasPorMes);
-                            printf("Números de parcelas: %i vezes\n", numParcelas);
+                            printf("NÃºmeros de parcelas: %i vezes\n", numParcelas);
                             printf("Taxa de juros(%%): %.2f%% a.m.\n\n",taxaJuros);
 
-                            styleLine(28);
+                            
                             printf("TABELA DETALHADA - PRICE");
-                            styleLine(28);
+                           
                             printf("\n\n");
 
                             printf("Valor fixo das parcelas: R$ %.2f reais.\n",vlParcelasPorMes);
@@ -133,8 +131,8 @@ void price()
 
                             amort = vlParcelasPorMes - vlPorcInicial;
 
-                            printf("Valor do juros no primeiro mês: R$ %.2f reais.\n",vlPorcInicial);
-                            printf("Valor da amortização no primeiro mês: R$ %.2f reais.\n\n",amort);
+                            printf("Valor do juros no primeiro mÃªs: R$ %.2f reais.\n",vlPorcInicial);
+                            printf("Valor da amortizaÃ§Ã£o no primeiro mÃªs: R$ %.2f reais.\n\n",amort);
 
                             for(int i=2; i<=numParcelas; i++)
                             {
@@ -148,14 +146,14 @@ void price()
 
                                 if(valorFinanciado<0 && vlPorcInicial<0)
                                 {
-                                    printf("Valor atualizado da amortização: R$ %.2f reais\n",amort);
+                                    printf("Valor atualizado da amortizaÃ§Ã£o: R$ %.2f reais\n",amort);
                                     printf("Valor atualizado do juros: SEM JUROS.\n");
                                     printf("Valor atualizado do saldo devedor: R$ %.2f reais\n\n",valorFinanciado);
 
                                 }
                                 else
                                 {
-                                    printf("Valor atualizado da amortização: R$ %.2f reais\n",amort);
+                                    printf("Valor atualizado da amortizaÃ§Ã£o: R$ %.2f reais\n",amort);
                                     printf("Valor atualizado do juros: R$ %.2f reais\n",vlPorcInicial);
                                     printf("Saldo devedor: R$ %.2f reais\n\n",valorFinanciado);
 
@@ -175,6 +173,6 @@ void price()
         }
 
     }
-    while(1);  //loop enquanto não for 'n' ou 'N'
+    while(1);  //loop enquanto nÃ£o for 'n' ou 'N'
 
 }

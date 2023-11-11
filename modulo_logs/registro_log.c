@@ -72,7 +72,6 @@ void exibirLogMovimentacao() {
 
 void menuLog() {
 
-	setLocale(LC_ALL,"");
 
 	int op;
 	do {
