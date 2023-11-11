@@ -28,11 +28,11 @@ int price()
         system("cls");
        
         printf("Deseja fazer uma nova simulação de financiamento no modelo Price?\n\n[s]SIM\n[n]NAO\n\n");
-        scanf(" %c",&iniciar); //Espaço usado antes de %c para limpar o scanf do ENTER pressionado para retornar
+        scanf(" %c",&iniciar);
         getchar();
         if(iniciar=='n' || iniciar=='N')
         {
-            return 0;     //sai do loop e volta para o simulacao_main()
+            return 0;   
         }
         if (iniciar != 's' && iniciar != 'S' && iniciar != 'n' && iniciar != 'N')
         {
@@ -47,10 +47,9 @@ int price()
                 sleep(1);
                 system("cls");
                
-                
                 printf("TABELA PRICE");
-                
                 printf("\n\n");
+                
                 printf("Digite o valor do imóvel: R$");
                 scanf("%f",&vlImovel);
 
@@ -68,7 +67,6 @@ int price()
                 scanf("%i",&numParcelas);
 
                 printf("\n");
-
 
                 vlParcelasPorMes = calculoPrice(valorFinanciado, taxaJuros, numParcelas);
 
@@ -92,7 +90,6 @@ int price()
                 {
                     
                     printf("DETALHES - SAC");
-                   
                     printf("\n\n");
 
                     printf("Deseja ver tabela detalhada?\n\n[s]SIM\n[n]NÃO\n\n\n");
@@ -109,7 +106,7 @@ int price()
                         if(tabDet=='s' || tabDet=='S')
                         {
                             sleep(1);
-                            system("cls");
+                            printf("\n");
                             
                             printf("DETALHES DE SIMULAÇÃO - PRICE");
                             
@@ -122,7 +119,6 @@ int price()
 
                             
                             printf("TABELA DETALHADA - PRICE");
-                           
                             printf("\n\n");
 
                             printf("Valor fixo das parcelas: R$ %.2f reais.\n",vlParcelasPorMes);

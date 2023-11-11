@@ -32,8 +32,7 @@ int sac() {
 		} else {
 			if(iniciar=='s' || iniciar=='S') {
 				sleep(1);
-				system("cls");
-				
+				system("cls");	
 
 				printf("TABELA SAC");
 				printf("\n\n");
@@ -90,9 +89,7 @@ int sac() {
 					} else {
 						if(tabDet=='s' || tabDet=='S') {
 							sleep(1);
-							system("cls");
-
-						
+							printf("\n");						
 							
 							printf("DETALHES DE SIMULAÇÃO - SAC");
 						
