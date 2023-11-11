@@ -6,24 +6,8 @@
 #include "tabela_sac.c"
 #include "tabela_price.c"
 #define MAX 80
-//ORIGINAL
 
-void linha(int qtdLinha) {
-	int i;
-	for(i=0; i<qtdLinha; i++) {
-		printf("=");
-	}
-	printf("\n\n");
-}
-
-void styleLine(int qtdStyLn) {
-	int i;
-	for(i=0; i<qtdStyLn; i++) {
-		printf("=");
-	}
-}
-
-void MenuSimulacao() { //TROCAR NOME PARA NÃO ENTRAR EM CONFLITO COM O MAIN DO PROJETO
+void MenuSimulacao() { 
 	int op;
 
 	setlocale(LC_ALL,"");
@@ -31,14 +15,11 @@ void MenuSimulacao() { //TROCAR NOME PARA NÃO ENTRAR EM CONFLITO COM O MAIN DO P
 	do {
 		sleep(1);
 		system("cls");
-		linha(MAX);
 
-		styleLine(27);
-		printf("SIMULAÇÃO DE FINANCIAMENTO");
-		styleLine(27);
+		printf("SIMULAÃ‡ÃƒO DE FINANCIAMENTO");
 		printf("\n\n");
 
-		printf("Selecione o modelo de simulação de financiamento:\n\n[1]TABELA SAC\n[2]TABELA PRICE\n[0]RETORNAR\n\n");
+		printf("Selecione o modelo de simulaÃ§Ã£o de financiamento:\n\n[1]Tabela SAC.\n[2]Tabela PRICE.\n[0]Retornar.\n\nEscolha: ");
 		scanf("%i",&op);
 		switch(op) {
 			case 1:
@@ -52,7 +33,7 @@ void MenuSimulacao() { //TROCAR NOME PARA NÃO ENTRAR EM CONFLITO COM O MAIN DO P
 				system("cls");
 				break;
 			default:
-				printf("Opção inválida!!\n");
+				printf("OpÃ§Ã£o invÃ¡lida!!\n");
 				sleep(1);
 				system("cls");
 				break;

@@ -18,7 +18,7 @@ int addUserFile(char username[30], char password[30]) {
 	} else {
 		// grava informações no arquivo
 		fprintf(file, "%s %s\n", username, password);
-		fclose(file); // movido para fora do bloco else
+		fclose(file);
 		return 1;
 	}
 }
@@ -28,7 +28,7 @@ int validaUsuario() {
 	char usuario[30];
 	char senha[30];
 
-	printf("Digite seu nome de usuario: ");
+	printf("Digite seu nome de usuário: ");
 	scanf("%29s", usuario);
 	getchar();
 
@@ -57,7 +57,7 @@ void registroUsuario() {
 	char senha[30];
 	char confirmacaoSenha[30];
 
-	printf("Digite seu nome de usuario: ");
+	printf("Digite seu nome de usuário: ");
 	scanf("%29s", usuario);
 	do {
 		printf("Crie sua senha: ");
@@ -67,7 +67,7 @@ void registroUsuario() {
 		scanf("%29s", confirmacaoSenha);
 
 		if (strcmp(senha, confirmacaoSenha) != 0) {
-			printf("As senhas nao coincidem. Tente novamente.\n\n");
+			printf("As senhas não coincidem. Tente novamente.\n\n");
 		} else if (strlen(senha) < 8) {
 			printf("A senha deve ter pelo menos 8 caracteres. Tente novamente.\n\n");
 		}
@@ -76,13 +76,13 @@ void registroUsuario() {
 	int validacaoUsuario = addUserFile(usuario, senha); // função para adicionar usuários no arquivo
 
 	if (validacaoUsuario == 1) {
-		printf("Usuario cadastrado com sucesso!!\n");
-		printf("Agora voce pode logar no sistema!!\n");
+		printf("Usuário cadastrado com sucesso!!\n");
+		printf("Agora você pode logar no sistema!!\n");
 	} else {
-		printf("Erro ao cadastrar usuario!!\n");
+		printf("Erro ao cadastrar usuário!!\n");
 	}
 
-	sleep(1);
+	sleep(0.7);
 	system("cls");
 }
 
@@ -91,7 +91,11 @@ void MenuPrincipal() {
 	int usuarioEncontrado;// recebe um valor caso usuario seja encontrado
 	int escolha;
 	while (continua) {
-		printf("Digite a opcao que deseja:\n1 - Imoveis\n2 - Clientes\n3 - Simular pagamento\n4 - Registro de movimentacoes\n5 - Relatorio gerencial\n6 - Sair\nEscolha: ");
+		
+		printf("LOGISISTEM");
+		printf("\n\n");
+		
+		printf("O que deseja fazer?\n\n[1]Módulo Imoveis.\n[2]Módulo Clientes.\n[3]Módulo Simulação Pagamento\n[4]Módulo Movimentações.\n[5]Logs do sistema.\n[6]Sair.\n\nEscolha: ");
 		scanf("%i", &escolha);
 		switch(escolha) {
 			case 1:
@@ -113,8 +117,8 @@ void MenuPrincipal() {
 				continua = false;
 				break;
 			default:
-				printf("Opcao invalida");
-				sleep(1.5);
+				printf("Opção inválida");
+				sleep(1);
 				system("cls");
 				break;
 		}
@@ -127,19 +131,23 @@ void menuLogin() {
 	int escolha;
 
 	while (continua) {
-		printf("Digite a opcao que deseja:\n1 - Entrar na minha conta.\n2 - Criar nova conta.\n3 - Sair\nEscolha: ");
+		
+		printf("LOGISISTEM");
+		printf("\n\n");
+		
+		printf("O que deseja fazer?\n\n[1]Entrar na minha conta.\n[2]Criar nova conta.\n[3]Sair.\n\nEscolha: ");
 		scanf("%i", &escolha);
 
 		switch (escolha) {
 			case 1:
 				usuarioEncontrado = validaUsuario();
 				if (usuarioEncontrado == 1) {
-					printf("Usuario encontrado, entrando no sistema.\n");
+					printf("Usuário encontrado, entrando no sistema.\n");
 					sleep(3);
 					system("cls");
-					MenuPrincipal(); // invoca menu principal
+					MenuPrincipal(); // Chama menu principal
 				} else {
-					printf("Usuario nao encontrado.\n");
+					printf("Usuário nao encontrado.\n");
 					sleep(3);
 					system("cls");
 				}
@@ -151,9 +159,10 @@ void menuLogin() {
 				continua = false;
 				break;
 			default:
-				printf("Digite uma opcao valida\n");
-				sleep(1.5);
+				printf("Opção inválida!!\n");
+				sleep(1);
 				system("cls");
+				break;
 		}
 	}
 }
