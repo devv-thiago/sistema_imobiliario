@@ -1,75 +1,85 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-
 #define ARQ_VENDAS "Data/Vendas.txt"
 
 char* selecaoTipoImovel() {
     int opcao;
     char* opcaoRetorno = NULL;
-    printf("1 - Casa\n2 - Apartamento\n3 - Terreno\nEscolha: ");
-    scanf("%i", &opcao);
+    printf("[1]Casa\n[2]Apartamento\n[3]Terreno\n\nEscolha: ");
+    scanf("%d", &opcao);
+
     switch (opcao) {
         case 1:
-            printf("Tipo selecionado: Casa\n");
             opcaoRetorno = strdup("Casa");
             break;
         case 2:
-            printf("Tipo selecionado: Apartamento\n");
             opcaoRetorno = strdup("Apartamento");
             break;
         case 3:
-            printf("Tipo selecionado: Terreno\n");
             opcaoRetorno = strdup("Terreno");
             break;
         default:
-            printf("Opcao invalida\n");
-            opcaoRetorno = strdup("Terreno");
+            printf("Opção inválida!!\n");
             break;
     }
+	
     return opcaoRetorno;
 }
 
-// Save sale information to a file
 void registraVendaArq(int idImovel, int idCliente, const char* endereco, const char* tipo, float valor) {
     FILE* vendas = fopen(ARQ_VENDAS, "a+");
     if (vendas == NULL) {
         printf("Erro ao abrir o arquivo de vendas.\n");
         return;
     }
-    
+
     fprintf(vendas, "%d %d %s %s %.2f\n", idImovel, idCliente, endereco, tipo, valor);
     fclose(vendas);
 }
 
 void registraVenda() {
-    int idImovel, idCliente;
+    int idImovel, idCliente, continua;
     char endereco[100];
-    
-    printf("Digite o ID do imovel: ");
+    float valor;
+
+    printf("Digite o ID do imóvel: ");
     scanf("%d", &idImovel);
-    
+
     printf("Digite o ID do cliente: ");
     scanf("%d", &idCliente);
-    
-    printf("Digite o endereco do imovel: ");
-    scanf("%s", endereco);
-    
+
+    printf("Digite o valor do imóvel: ");
+    scanf("%f", &valor);
+
+    printf("Digite o endereço do imóvel: ");
+    scanf(" %[^\n]s", endereco);
+
     char* tipo = selecaoTipoImovel();
+
     if (tipo != NULL) {
-        registraVendaArq(idImovel, idCliente, endereco, tipo, 0.0); // Assume 0.0 como valor inicial
+        registraVendaArq(idImovel, idCliente, endereco, tipo, valor);
+        printf("Movimentação registrada com sucesso!\n");
         free(tipo);
+    } else {
+        printf("Erro ao selecionar o tipo.\n");
     }
 }
 
 void menuMovimentacao() {
     int continua;
-    
+
     do {
+        system("cls");
+
+        printf("REGISTRO DE MOVIMENTAÇÕES");
+        printf("\n\n");
+
         registraVenda();
-        
-        printf("Deseja continuar? (1 para Sim / 0 para Nao): ");
+
+        printf("\nDeseja continuar?\n\n[1] SIM\n[0] NAO: ");
         scanf("%d", &continua);
-        
+
     } while (continua == 1);
 }
+

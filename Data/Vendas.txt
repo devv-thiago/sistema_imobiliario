@@ -1,3 +1,7 @@
 1020 1234 avenida Terreno 0.00
 0 0 sao Terreno 0.00
 0 0 camilo Apartamento 0.00
+1200 1200 avenida Terreno 0.00
+0 11277232 sao Terreno 0.00
+123 123 avenida sao camilo Apartamento 220000.00
+123 123 avenida sao camilo Casa 123000.00
