@@ -6,6 +6,8 @@
 #include "modulo_simulacao_pagamento\menu_simulacao.c"
 #include "modulo_logs\registro_log.c"
 #include "modulo_movimentacoes\movimentacoes.c"
+#include "modulo_imoveis\cadastro_imoveis.c"
+
 #define ARQ_USUARIOS "Data/Users.txt"
 
 
@@ -99,7 +101,7 @@ void MenuPrincipal() {
 		scanf("%i", &escolha);
 		switch(escolha) {
 			case 1:
-				// Chama modulo Imoveis
+				MenuImovel();
 				break;
 			case 2:
 				// Chama modulo Clientes
