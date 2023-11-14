@@ -27,8 +27,7 @@ int gerarNovoID() {
 	return novoID;
 }
 
-
-int cadastrarImovelArq(int idImovel, char endereco[100], char tipo[50], float preco) {
+int cadastrarImovelArq(int idImovel, char endereco[100], char tipo[50], char preco[20]) {
 	FILE *arquivo = fopen(IMOVEL_ARQ, "a+");
 
 	if (arquivo == NULL) {
@@ -36,7 +35,7 @@ int cadastrarImovelArq(int idImovel, char endereco[100], char tipo[50], float pr
 		return 0;
 	}
 
-	fprintf(arquivo, "%i %s %s %f\n", idImovel, endereco, tipo, preco);
+	fprintf(arquivo, "%i %s %s %s\n", idImovel, endereco, tipo, preco);
 
 	fclose(arquivo);
 	return 1;
@@ -44,8 +43,7 @@ int cadastrarImovelArq(int idImovel, char endereco[100], char tipo[50], float pr
 
 void cadastrarImovel() {
 	int idImovel;
-	char endereco[100], tipo[50];
-	float preco;
+	char endereco[100], tipo[50], preco[20];
 
 	idImovel = gerarNovoID();
 	printf("Digite o tipo do imóvel: ");
@@ -53,9 +51,10 @@ void cadastrarImovel() {
 	getchar();
 	printf("Digite o endereço do imóvel: ");
 	scanf("%s", endereco);
-	printf("Digite o valor do imóvel: ");
-	scanf("%f", &preco);
 	getchar();
+	printf("Digite o valor do imóvel: ");
+	scanf("%s", preco);
+
 
 	int imovelCadastrado = cadastrarImovelArq(idImovel, endereco, tipo, preco);
 
@@ -79,12 +78,11 @@ void listarImoveis() {
 
 	while (!feof(arquivo)) {
 		int idImovel;
-		char endereco[100], tipo[50];
-		float preco;
+		char endereco[100], tipo[50], preco[20];
 
-		fscanf(arquivo, "%i %s %s %f", &idImovel, endereco, tipo, &preco);
+		fscanf(arquivo, "%i %s %s %s", &idImovel, endereco, tipo, preco);
 		if (!feof(arquivo)) {
-			printf("%i\t%s\t%s\t%.2f\n", idImovel, endereco, tipo, preco);
+			printf("%i\t%s\t%s\t%s\n", idImovel, endereco, tipo, preco);
 		}
 	}
 
@@ -127,4 +125,3 @@ void MenuImovel() {
 		}
 	} while (opcao != 0);
 }
-

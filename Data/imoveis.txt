@@ -4,3 +4,6 @@
 2 o (null) 0.000000
 3 avenida casa 0.000000
 3 avenida casa 0.000000
+4 avenida casa
+5 camilo sao
+6 avenida casa sao

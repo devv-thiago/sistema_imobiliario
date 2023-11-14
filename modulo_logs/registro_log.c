@@ -3,6 +3,7 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include <locale.h>
+
 #define IMOVEL_LOG "./Data/log_imovel.txt"
 #define CLIENTE_LOG "./Data/log_cliente.txt"
 #define MOVIMENTACAO_LOG "./Data/log_movimentacao.txt"
@@ -20,7 +21,6 @@ char* obterDataHora() {
     strftime(dataHoraFormatada, 50, "%Y-%m-%d %H:%M:%S", localtime(&horaAtual));
     return dataHoraFormatada;
 }
-
 
 void logImovel(int cod, char tipoImovel[30], char usuario[30]) {
     FILE *arquivo = fopen(IMOVEL_LOG, "a+");
@@ -49,10 +49,14 @@ void exibirLogImovel() {
     char tipoImovel[30];
     char usuario[30];
     char dataHora[50];
+    char linha[100];  // Ajuste o tamanho conforme necessário
 
-    while (!feof(arquivo)) {
-        fscanf(arquivo, "%i %s %s %s\n", &cod, tipoImovel, usuario, dataHora);
-        printf("%i %s %s %s\n", cod, tipoImovel, usuario, dataHora);
+    while (fgets(linha, sizeof(linha), arquivo) != NULL) {
+        if (sscanf(linha, "%i %29s %29s %49s", &cod, tipoImovel, usuario, dataHora) == 4) {
+            printf("%i-%s-%s-%s\n", cod, tipoImovel, usuario, dataHora);
+        } else {
+            printf("Erro ao ler a linha: %s\n", linha);
+        }
     }
 
     fclose(arquivo);
@@ -84,10 +88,14 @@ void exibirLogCliente() {
     int id;
     char cliente[30];
     char dataHora[50];
+    char linha[100];  // Ajuste o tamanho conforme necessário
 
-    while (!feof(arquivo)) {
-        fscanf(arquivo, "%i %s %s\n", &id, cliente, dataHora);
-        printf("%i %s %s\n", id, cliente, dataHora);
+    while (fgets(linha, sizeof(linha), arquivo) != NULL) {
+        if (sscanf(linha, "%i %29s %49s", &id, cliente, dataHora) == 3) {
+            printf("%i-%s-%s\n", id, cliente, dataHora);
+        } else {
+            printf("Erro ao ler a linha: %s\n", linha);
+        }
     }
 
     fclose(arquivo);
@@ -119,10 +127,14 @@ void exibirLogMovimentacao() {
     char acao[20];
     char usuario[30];
     char dataHora[50];
+    char linha[100];  // Ajuste o tamanho conforme necessário
 
-    while (!feof(arquivo)) {
-        fscanf(arquivo, "%s %s %s\n", acao, usuario, dataHora);
-        printf("%s %s %s\n", acao, usuario, dataHora);
+    while (fgets(linha, sizeof(linha), arquivo) != NULL) {
+        if (sscanf(linha, "%19s %29s %49s", acao, usuario, dataHora) == 3) {
+            printf("%s-%s-%s\n", acao, usuario, dataHora);
+        } else {
+            printf("Erro ao ler a linha: %s\n", linha);
+        }
     }
 
     fclose(arquivo);
@@ -140,26 +152,18 @@ void menuLog() {
 
         printf("O que deseja fazer?\n\n[1]Log de Imóveis.\n[2]Log de Clientes.\n[3]Log de Movimentações.\n[0]Retornar.\n\nEscolha: ");
 
-        fflush(stdin);
+        int c;
+        while ((c = getchar()) != '\n' && c != EOF);
         scanf("%i", &op);
 
         switch(op) {
             case 1:
-                logImovel(120, "casa", "thiago.fofano");
-                logImovel(121, "apartamento", "thiago.fofano");
-                logImovel(122, "terreno", "thiago.fofano");
                 exibirLogImovel();
                 break;
             case 2:
-                logCliente(123, "Jose alves");
-                logCliente(124, "Jose silva");
-                logCliente(125, "Thiago fofano");
                 exibirLogCliente();
                 break;
             case 3:
-                logMovimentacao("venda", "thiago.fofano");
-                logMovimentacao("compra", "thiago.fofano");
-                logMovimentacao("venda", "thiago.fofano");
                 exibirLogMovimentacao();
                 break;
             case 0:
@@ -174,4 +178,3 @@ void menuLog() {
         }
     }
 }
-

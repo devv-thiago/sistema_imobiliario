@@ -90,7 +90,7 @@ void registroUsuario() {
 
 void MenuPrincipal() {
 	bool continua = true;
-	int usuarioEncontrado;// recebe um valor caso usuario seja encontrado
+	int usuarioEncontrado;
 	int escolha;
 	while (continua) {
 
@@ -149,7 +149,7 @@ void menuLogin() {
 					system("cls");
 					MenuPrincipal(); // Chama menu principal
 				} else {
-					printf("Usuário nao encontrado.");
+					printf("Usuário não encontrado.");
 					sleep(3);
 					system("cls");
 				}
