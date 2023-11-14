@@ -1,0 +1,6 @@
+1 avenida Apartamento 0.000000
+2 sao (null) 0.000000
+2 avenida Apartamento 0.000000
+2 o (null) 0.000000
+3 avenida casa 0.000000
+3 avenida casa 0.000000
