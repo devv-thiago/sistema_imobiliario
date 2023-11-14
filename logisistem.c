@@ -7,6 +7,7 @@
 #include "modulo_logs\registro_log.c"
 #include "modulo_movimentacoes\movimentacoes.c"
 #include "modulo_imoveis\cadastro_imoveis.c"
+#include "modulo_clientes\cadastro_clientes.c"
 
 #define ARQ_USUARIOS "Data/Users.txt"
 
@@ -104,7 +105,7 @@ void MenuPrincipal() {
 				MenuImovel();
 				break;
 			case 2:
-				// Chama modulo Clientes
+				menuCliente();
 				break;
 			case 3:
 				MenuSimulacao();

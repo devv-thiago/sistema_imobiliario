@@ -1,73 +1,131 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
 
-#define MAX_CLIENTES 100
+#define CLIENTE_ARQ "./Data/clientes.txt"
 
-struct Cliente {
-    char nome[50];
-    char telefone[15];
-    char cpf[11];
-    char email[50];
-};
 
-void cadastrarCliente(struct Cliente clientes[], int *numClientes) {
-    if (*numClientes < MAX_CLIENTES) {
-        printf("Digite o nome do cliente: ");
-        scanf("%s", clientes[*numClientes].nome);
+int gerarNovoIDCliente() {
+	FILE *arquivo = fopen(CLIENTE_ARQ, "rb");
+	int numRegistros = 0;
 
-        printf("Digite o telefone do cliente: ");
-        scanf("%s", clientes[*numClientes].telefone);
-        
-        printf("Digite o CPF do cliente: ");
-        scanf("%s", clientes[*numClientes].cpf);
+	if (arquivo == NULL) {
+		printf("Erro ao abrir o arquivo\n");
+		return 0;
+	}
 
-        printf("Digite o email do cliente: ");
-        scanf("%s", clientes[*numClientes].email);
+	while (fgetc(arquivo) != EOF) {
+		char c = fgetc(arquivo);
+		if (c == '\n') {
+			numRegistros++;
+		}
+	}
+	fclose(arquivo);
 
-        (*numClientes)++;
-        printf("Cliente cadastrado com sucesso!\n");
-    } else {
-        printf("Limite de clientes atingido. Impossível cadastrar mais.\n");
-    }
+	int novoID = numRegistros + 1;
+
+	return novoID;
 }
 
-void exibirClientes(struct Cliente clientes[], int numClientes) {
-    printf("\nClientes cadastrados:\n");
-    for (int i = 0; i < numClientes; i++) {
-        printf("Cliente %d:\n", i + 1);
-        printf("Nome: %s\n", clientes[i].nome);
-        printf("Telefone: %s\n", clientes[i].telefone);
-        printf("CPF: %s\n", clientes[i].cpf);
-        printf("Email: %s\n\n", clientes[i].email);
-    }
+void cadastrarClienteArq(int idCliente, char nome[50], char telefone[15], char cpf[11], char email[50]) {
+	FILE *arquivo = fopen(CLIENTE_ARQ, "a+");
+
+	if (arquivo == NULL) {
+		printf("Erro ao abrir o arquivo!");
+		return;
+	}
+
+	fprintf(arquivo, "%i %s %s %s %s\n", idCliente, nome, telefone, cpf, email);
+
+	fclose(arquivo);
 }
 
-int main() {
-    struct Cliente clientes[MAX_CLIENTES];
-    int numClientes = 0;
-    int escolha;
+void cadastrarCliente() {
+	int idCliente;
+	char nome[50];
+	char telefone[15];
+	char cpf[11];
+	char email[50];
+	
+	getchar();
+	printf("Digite o nome do cliente: ");
+	scanf("%s", nome);
+	getchar();
 
-    do {
-        printf("\n1 - Cadastrar Cliente\n");
-        printf("2 - Exibir Clientes\n");
-        printf("0 - Sair\n");
-        printf("Escolha uma opção: ");
-        scanf("%d", &escolha);
+	printf("Digite o telefone do cliente: ");
+	scanf("%s", telefone);
+	getchar();
 
-        switch (escolha) {
-            case 1:
-                cadastrarCliente(clientes, &numClientes);
-                break;
-            case 2:
-                exibirClientes(clientes, numClientes);
-                break;
-            case 0:
-                printf("Encerrando Sistema. Obrigado!\n");
-                break;
-            default:
-                printf("Opção inválida. Tente novamente.\n");
-        }
-    } while (escolha != 0);
+	printf("Digite o CPF do cliente: ");
+	scanf("%s", cpf);
+	getchar();
 
-    return 0;
+	printf("Digite o email do cliente: ");
+	scanf("%s", email);
+	getchar();
+
+	idCliente = gerarNovoIDCliente();
+
+	cadastrarClienteArq(idCliente, nome, telefone, cpf, email);
+	
+	printf("Cliente cadastrado com sucesso!\n");
+	sleep(0.7);
+}
+
+void exibirClientes() {
+	FILE *arquivo = fopen(CLIENTE_ARQ, "r");
+
+	if (arquivo == NULL) {
+		printf("Erro ao abrir o arquivo clientes.txt\n");
+		return;
+	}
+
+	printf("\nClientes cadastrados:\n");
+	char nome[50];
+	char telefone[15];
+	char cpf[11];
+	char email[50];
+
+	while (fscanf(arquivo, "%s %s %s %s", nome, telefone, cpf, email) != EOF) {
+		printf("Nome: %s\n", nome);
+		printf("Telefone: %s\n", telefone);
+		printf("CPF: %s\n", cpf);
+		printf("Email: %s\n\n", email);
+	}
+	printf("Aperte ENTER para continuar.\n");
+	getchar();
+	
+	fclose(arquivo);
+}
+
+int menuCliente() {
+	int escolha;
+
+	do {
+		system("cls");
+
+		printf("CLIENTES");
+		printf("\n\n");
+
+		printf("[1] Cadastrar Cliente.\n");
+		printf("[2] Exibir Clientes.\n");
+		printf("[0] Retornar.\n\n");
+		printf("Escolha: ");
+		scanf("%d", &escolha);
+
+		switch (escolha) {
+			case 1:
+				cadastrarCliente();
+				break;
+			case 2:
+				exibirClientes();
+				break;
+			case 0:
+				system("cls");
+				break;
+			default:
+				printf("Opção inválida!!\n");
+		}
+	} while (escolha != 0);
+
 }

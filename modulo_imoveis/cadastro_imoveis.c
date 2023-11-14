@@ -5,7 +5,7 @@
 
 #define IMOVEL_ARQ "./Data/imoveis.txt"
 
-int gerarNovoID() {
+int gerarNovoIDImovel() {
 	FILE *arquivo = fopen(IMOVEL_ARQ, "rb");
 	int numRegistros = 0;
 
@@ -37,15 +37,16 @@ int cadastrarImovelArq(int idImovel, char endereco[100], char tipo[50], char pre
 
 	fprintf(arquivo, "%i %s %s %s\n", idImovel, endereco, tipo, preco);
 
-	fclose(arquivo);
 	return 1;
+	fclose(arquivo);
+
 }
 
 void cadastrarImovel() {
 	int idImovel;
 	char endereco[100], tipo[50], preco[20];
 
-	idImovel = gerarNovoID();
+	getchar();
 	printf("Digite o tipo do imóvel: ");
 	scanf("%s", tipo);
 	getchar();
@@ -54,7 +55,9 @@ void cadastrarImovel() {
 	getchar();
 	printf("Digite o valor do imóvel: ");
 	scanf("%s", preco);
+	getchar();
 
+	idImovel = gerarNovoIDImovel();
 
 	int imovelCadastrado = cadastrarImovelArq(idImovel, endereco, tipo, preco);
 
@@ -85,6 +88,8 @@ void listarImoveis() {
 			printf("%i\t%s\t%s\t%s\n", idImovel, endereco, tipo, preco);
 		}
 	}
+	printf("Aperte ENTER para continuar.\n");
+	getchar();
 
 	fclose(arquivo);
 }
