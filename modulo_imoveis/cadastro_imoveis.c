@@ -6,66 +6,66 @@
 #define IMOVEL_ARQ "./Data/imoveis.txt"
 
 int gerarNovoIDImovel() {
-	FILE *arquivo = fopen(IMOVEL_ARQ, "rb");
-	int numRegistros = 0;
+    FILE *arquivo = fopen(IMOVEL_ARQ, "r");
 
-	if (arquivo == NULL) {
-		printf("Erro ao abrir o arquivo\n");
-		return 0;
-	}
+    if (arquivo == NULL) {
+        printf("Erro ao abrir o arquivo\n");
+        return 0;
+    }
 
-	while (fgetc(arquivo) != EOF) {
-		char c = fgetc(arquivo);
-		if (c == '\n') {
-			numRegistros++;
-		}
-	}
-	fclose(arquivo);
+    int numRegistros = 0;
+    char linha[256];
 
-	int novoID = numRegistros + 1;
+    while (fgets(linha, sizeof(linha), arquivo) != NULL) {
+        numRegistros++;
+    }
 
-	return novoID;
+    fclose(arquivo);
+
+    return numRegistros + 1;
 }
 
-int cadastrarImovelArq(int idImovel, char endereco[100], char tipo[50], char preco[20]) {
+void cadastrarImovelArq(int idImovel, char endereco[100], char tipo[50], float preco) {
 	FILE *arquivo = fopen(IMOVEL_ARQ, "a+");
 
 	if (arquivo == NULL) {
-		printf("Erro ao abrir o arquivo!");
-		return 0;
+		printf("Erro ao abrir o arquivo!\n");
+		return;
 	}
 
-	fprintf(arquivo, "%i %s %s %s\n", idImovel, endereco, tipo, preco);
+	fprintf(arquivo, "%i %s %s %.2f\n", idImovel, endereco, tipo, preco);
 
-	return 1;
 	fclose(arquivo);
-
 }
 
 void cadastrarImovel() {
 	int idImovel;
-	char endereco[100], tipo[50], preco[20];
+	float preco;
+	char endereco[100], tipo[50];
 
-	getchar();
+	fflush(stdin);  // Limpar o buffer de entrada
+
 	printf("Digite o tipo do imóvel: ");
 	scanf("%s", tipo);
-	getchar();
+
+	fflush(stdin);
+
 	printf("Digite o endereço do imóvel: ");
 	scanf("%s", endereco);
-	getchar();
+
+	fflush(stdin);
+
 	printf("Digite o valor do imóvel: ");
-	scanf("%s", preco);
-	getchar();
+	scanf("%f", &preco);
+
+	fflush(stdin);
 
 	idImovel = gerarNovoIDImovel();
 
-	int imovelCadastrado = cadastrarImovelArq(idImovel, endereco, tipo, preco);
+	cadastrarImovelArq(idImovel, endereco, tipo, preco);
 
-	if (imovelCadastrado == 1) {
-		printf("Imóvel cadastrado com sucesso!\n");
-	} else {
-		printf("Erro ao cadastrar imóvel!\n");
-	}
+	printf("Imóvel cadastrado com sucesso!\n");
+	sleep(1);
 }
 
 void listarImoveis() {
@@ -77,7 +77,8 @@ void listarImoveis() {
 	}
 
 	printf("\nLista de Imóveis:\n");
-	printf("ID\tEndereço\tTipo\tPreço\n");
+
+	fflush(stdin);
 
 	while (!feof(arquivo)) {
 		int idImovel;
@@ -85,48 +86,45 @@ void listarImoveis() {
 
 		fscanf(arquivo, "%i %s %s %s", &idImovel, endereco, tipo, preco);
 		if (!feof(arquivo)) {
-			printf("%i\t%s\t%s\t%s\n", idImovel, endereco, tipo, preco);
+			printf("ID: %i\n", idImovel);
+			printf("Endereço: %s\n", endereco);
+			printf("Tipo: %s\n", tipo);
+			printf("Preço: %s\n\n", preco);
 		}
 	}
-	printf("Aperte ENTER para continuar.\n");
+	printf("Pressione ENTER para continuar.\n");
 	getchar();
 
 	fclose(arquivo);
 }
 
-void MenuImovel() {
-	int opcao;
+int menuImovel() {
+	int escolha;
 
 	do {
 		system("cls");
 		printf("IMÓVEIS");
 		printf("\n\n");
 
-		printf("[1]Cadastrar imóveis.\n");
-		printf("[2]Listar imóveis.\n");
-		printf("[0]Retornar.\n\n");
+		printf("[1] Cadastrar imóveis.\n");
+		printf("[2] Listar imóveis.\n");
+		printf("[0] Retornar.\n\n");
 		printf("Escolha: ");
-		scanf("%d", &opcao);
+		scanf("%d", &escolha);
 
-		switch (opcao) {
+		switch (escolha) {
 			case 1:
-				system("cls");
-				printf("IMÓVEIS");
-				printf("\n\n");
 				cadastrarImovel();
-				sleep(1);
 				break;
 			case 2:
-				system("cls");
-				printf("IMÓVEIS");
-				printf("\n\n");
 				listarImoveis();
 				break;
 			case 0:
-				system("cls");
 				break;
 			default:
 				printf("Opção inválida!!\n");
 		}
-	} while (opcao != 0);
+	} while (escolha != 0);
+
+	return 0;
 }

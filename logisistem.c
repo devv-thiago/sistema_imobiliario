@@ -4,7 +4,6 @@
 #include<stdbool.h>
 #include <unistd.h>
 #include "modulo_simulacao_pagamento\menu_simulacao.c"
-#include "modulo_logs\registro_log.c"
 #include "modulo_movimentacoes\movimentacoes.c"
 #include "modulo_imoveis\cadastro_imoveis.c"
 #include "modulo_clientes\cadastro_clientes.c"
@@ -98,11 +97,11 @@ void MenuPrincipal() {
 		printf("LOGISISTEM");
 		printf("\n\n");
 
-		printf("O que deseja fazer?\n\n[1]Módulo Imoveis.\n[2]Módulo Clientes.\n[3]Módulo Simulação Pagamento\n[4]Módulo Movimentações.\n[5]Logs do sistema.\n[0]Sair.\n\nEscolha: ");
+		printf("O que deseja fazer?\n\n[1]Módulo Imoveis.\n[2]Módulo Clientes.\n[3]Módulo Simulação Pagamento\n[4]Módulo Movimentações.\n[0]Sair.\n\nEscolha: ");
 		scanf("%i", &escolha);
 		switch(escolha) {
 			case 1:
-				MenuImovel();
+				menuImovel();
 				break;
 			case 2:
 				menuCliente();
@@ -112,9 +111,6 @@ void MenuPrincipal() {
 				break;
 			case 4:
 				menuMovimentacao();
-				break;
-			case 5:
-				menuLog();
 				break;
 			case 0:
 				exit(EXIT_FAILURE);
@@ -134,7 +130,7 @@ void menuLogin() {
 	int escolha;
 
 	while (continua) {
-
+		system("cls");
 		printf("LOGISISTEM");
 		printf("\n\n");
 
